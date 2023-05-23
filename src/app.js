@@ -4,12 +4,12 @@ const { loginRouter, userRouter, categoryRouter, postRouter } = require('./route
 
 const app = express();
 
+app.use(express.json());
+
 // não remova ou mova esse endpoint
 app.get('/', (_request, response) => {
   response.send();
 });
-
-app.use(express.json());
 
 app.use('/login', loginRouter);
 app.use('/user', userRouter);

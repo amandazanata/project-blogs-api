@@ -1,7 +1,11 @@
 const { Op } = require('sequelize'); // https://sequelize.org/docs/v6/core-concepts/model-querying-basics/
-const { BlogPost, Category,
+const {
+  BlogPost,
+  Category,
   User,
-  PostCategory, sequelize } = require('../models');
+  PostCategory,
+  sequelize,
+} = require('../models');
 const { validatePost } = require('./validation/postService.validation');
 
 const isMissingCategory = async (categories) => {

@@ -7,7 +7,7 @@ const getLogin = async (req, res) => {
     return res.status(400).json({ message: 'Invalid fields' });
   }
 
-  res.status(200).json({ token: result });
+  return res.status(200).json({ token: result });
 };
 
 const getUserById = async (req, res) => {
@@ -17,7 +17,7 @@ const getUserById = async (req, res) => {
     return res.status(200).json(result);
   }
 
-  res.status(404).json({ message: 'User does not exist' });
+  return res.status(404).json({ message: 'User does not exist' });
 };
 
 const getAllUsers = async (_req, res) => {
@@ -32,7 +32,7 @@ const createUser = async (req, res) => {
   if (result) {
     return res.status(201).json({ token: result });
   }
-  res.status(409).json({ message: 'User already registered' });
+  return res.status(409).json({ message: 'User already registered' });
 };
 
 const deleteUser = async (req, res) => {
@@ -42,7 +42,7 @@ const deleteUser = async (req, res) => {
 
   console.log('controller user delete', result);
 
-  res.status(204).end();
+  return res.status(204).end();
 };
 
 module.exports = {

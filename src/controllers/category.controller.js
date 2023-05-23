@@ -3,7 +3,7 @@ const categoryService = require('../services/category.service');
 const getAllCategories = async (_req, res) => {
   const allCategories = await categoryService.getAllCategories();
 
-  res.status(200).json(allCategories);
+  return res.status(200).json(allCategories);
 };
 
 const createCategory = async (req, res) => {
@@ -12,7 +12,7 @@ const createCategory = async (req, res) => {
   if (result) {
     return res.status(201).json(result);
   }
-  res.status(409).json({ message: 'Category already registered' });
+  return res.status(409).json({ message: 'Category already registered' });
 };
 
 module.exports = {
