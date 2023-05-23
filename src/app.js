@@ -18,6 +18,8 @@ app.use('/post', postRouter);
 
 // ...
 
+app.use((error, _req, res, _next) => res.status(error.status).json({ message: error.message }));
+
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;

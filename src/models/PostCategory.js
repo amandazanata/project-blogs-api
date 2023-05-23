@@ -1,35 +1,52 @@
 module.exports = (sequelize, DataTypes) => {
-  const PostCategory = sequelize.define({
-    categoryId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
+  const PostCategory = sequelize.define('PostCategory', 
+    {
+      postId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        references: {
+          model: 'BlogPosts',
+          key: 'id'
+        },
+        field: 'post_id',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      categoryId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        field: 'category_id',
+        references: {
+          model: 'Categories',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
     },
-    postId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
-    },
-  },
     {
       timestamps: false,
+      tableName: 'posts_categories',
       underscored: true,
-      tableName: 'posts_categories'
-  });
+    }
+  );
 
-  PostCategory.associate = (models) => {
-    models.Category.belongsToMany(models.BlogPost, {
-      as: 'blogPosts',
+  PostCategory.associate = ({BlogPost, Category}) => {
+    Category.belongsToMany(BlogPost, {
+      as: 'blog_posts',
       through: PostCategory,
-      foreignKey: 'categoryId',
-      otherKey: 'postId',
+      foreignKey: 'post_id', // se refere ao id de Book na tabela de ``
+      otherKey: 'category_id', // se refere a outra chave de ``
     });
-    models.BlogPost.belongsToMany(models.Category, {
+    BlogPost.belongsToMany(Category, {
       as: 'categories',
       through: PostCategory,
-      foreignKey: 'postId',
-      otherKey: 'categoryId',
+      foreignKey: 'category_id', // se refere ao id de User na tabela de ``
+      otherKey: 'post_id',
     });
   };
+
   return PostCategory;
 };

@@ -3,36 +3,35 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('blog_posts', {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
       },
       content: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        field: 'userId',
         references: {
           model: 'users',
           key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       published: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       },
       updated: {
         type: Sequelize.DATE,
-      }
+        defaultValue: Sequelize.fn('now')
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
