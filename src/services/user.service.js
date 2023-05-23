@@ -15,7 +15,7 @@ const getToken = (result) => {
   return token;
 };
 
-const getLogin = async (email, password) => {
+const getLogin = async (email, password) => { // Requisito 3: Sua aplicação deve ter o endpoint POST /login
   const logedIn = await User.findOne({
     where: { email, password },
   });
@@ -32,7 +32,7 @@ const getUserByEmail = async (email) => {
   return result;
 };
 
-const getUserById = async (id) => {
+const getUserById = async (id) => { // Requisito 6: Sua aplicação deve ter o endpoint GET /use:id
   const user = await User.findByPk(id);
   if (user) {
     const [result] = removePassword([user]);
@@ -41,12 +41,12 @@ const getUserById = async (id) => {
   return user;
 };
 
-const getAllUsers = async () => {
+const getAllUsers = async () => { // Requisito 5: Sua aplicação deve ter o endpoint GET /user
   const result = await User.findAll();
   return removePassword(result);
 };
 
-const createUser = async (user) => {
+const createUser = async (user) => { // Requisito 4: Sua aplicação deve ter o endpoint POST /user
   const exists = await getUserByEmail(user.email);
   if (exists) {
     return null;
@@ -56,7 +56,7 @@ const createUser = async (user) => {
   return getToken(result);
 };
 
-const deleteUser = async (id) => User.destroy({ where: { id } });
+const deleteUser = async (id) => User.destroy({ where: { id } }); // Requisito 17: Sua aplicação deve ter o endpoint DELETE /user/me
 
 module.exports = {
   getLogin,

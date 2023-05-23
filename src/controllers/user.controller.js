@@ -10,7 +10,7 @@ const getLogin = async (req, res) => {
   return res.status(200).json({ token: result });
 };
 
-const getUserById = async (req, res) => {
+const getUserById = async (req, res) => { // Requisito 6: Sua aplicação deve ter o endpoint GET /use:id
   const { id } = req.params;
   const result = await userService.getUserById(id);
   if (result) {
@@ -20,7 +20,7 @@ const getUserById = async (req, res) => {
   return res.status(404).json({ message: 'User does not exist' });
 };
 
-const getAllUsers = async (_req, res) => {
+const getAllUsers = async (_req, res) => { // Requisito 5: Sua aplicação deve ter o endpoint GET /user
   const allUsers = await userService.getAllUsers();
 
   res.status(200).json(allUsers);
@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
   return res.status(409).json({ message: 'User already registered' });
 };
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => { // Requisito 17: Sua aplicação deve ter o endpoint DELETE /user/me
   const { id } = req.user;
 
   const result = await userService.deleteUser(id);

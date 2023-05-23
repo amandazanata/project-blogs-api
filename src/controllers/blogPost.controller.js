@@ -6,7 +6,7 @@ const getAllPosts = async (_req, res) => {
   return res.status(200).json(result);
 };
 
-const getPostById = async (req, res) => {
+const getPostById = async (req, res) => { // Requisito 14: Sua aplicação deve ter o endpoint GET /post/:id
   const { id } = req.params;
   const result = await blogPostService.getPostById(id);
   if (!result) {
@@ -15,7 +15,7 @@ const getPostById = async (req, res) => {
   return res.status(200).json(result);
 };
 
-const getPostByQuery = async (req, res) => {
+const getPostByQuery = async (req, res) => { // Requisito 18: Sua aplicação deve ter o endpoint GET /post/search?q=:searchTerm
   const { q } = req.query;
   const result = await blogPostService.getPostByQuery(q);
 
@@ -34,7 +34,7 @@ const createPost = async (req, res) => {
   return res.status(201).json(result);
 };
 
-const updatePost = async (req, res) => {
+const updatePost = async (req, res) => { // Requisito 15: Sua aplicação deve ter o endpoint PUT /post/:id
   const { id } = req.params;
   const post = req.body;
 
@@ -45,7 +45,7 @@ const updatePost = async (req, res) => {
   return res.status(200).json(result);
 };
 
-const deletePost = async (req, res) => {
+const deletePost = async (req, res) => { // Requisito 16: Sua aplicação deve ter o endpoint DELETE /post/:id
   const { id } = req.params;
 
   const result = await blogPostService.deletePost(id, req.user.id);

@@ -24,7 +24,7 @@ const getAllPosts = async () => BlogPost.findAll({
   ],
 });
 
-const getPostById = async (id) => BlogPost.findOne({
+const getPostById = async (id) => BlogPost.findOne({ // Requisito 14: Sua aplicação deve ter o endpoint GET /post/:id
   where: { id },
   include: [
     { model: User, as: 'user', attributes: { exclude: ['password'] } },
@@ -32,7 +32,7 @@ const getPostById = async (id) => BlogPost.findOne({
   ],
 });
 
-const getPostByQuery = async (q) => BlogPost.findAll({
+const getPostByQuery = async (q) => BlogPost.findAll({ // Requisito 18: Sua aplicação deve ter o endpoint GET /post/search?q=:searchTerm
   where: {
     [Op.or]: [
       { title: { [Op.substring]: q } },
@@ -66,7 +66,7 @@ const createPost = async ({ title, content, categoryIds }, userId) => {
   }
 };
 
-const updatePost = async ({ title, content }, id, userId) => {
+const updatePost = async ({ title, content }, id, userId) => { // Requisito 15: Sua aplicação deve ter o endpoint PUT /post/:id
   const result = await validatePost(id, userId);
   if (result) {
     return result;
@@ -83,7 +83,7 @@ const updatePost = async ({ title, content }, id, userId) => {
   return { type: 400, message: 'Nothing to update' };
 };
 
-const deletePost = async (id, userId) => {
+const deletePost = async (id, userId) => { // Requisito 16: Sua aplicação deve ter o endpoint DELETE /post/:id
   const result = await validatePost(id, userId);
   if (result) {
     return result;

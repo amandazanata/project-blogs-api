@@ -5,7 +5,6 @@ const { validateToken } = require('../middlewares/token.validation');
 
 const router = express.Router();
 
-router.get('/', validateToken, category.getAllCategories);
-router.post('/', validateToken, validateCategory, category.createCategory);
-
+router.get('/', validateToken, category.getAllCategories);// Requisito 13: Sua aplicação deve ter o endpoint GET /post
+router.post('/', validateToken, validateCategory, category.createCategory); // Requisito 12: Sua aplicação deve ter o endpoint POST /post
 module.exports = router;

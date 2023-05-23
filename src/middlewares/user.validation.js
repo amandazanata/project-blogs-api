@@ -7,7 +7,7 @@ const userValidation = Joi.object().keys({
   image: Joi.string(),
 });
 
-const validateUser = (req, res, next) => {
+const validateUser = (req, res, next) => { // Requisito 4: Sua aplicação deve ter o endpoint POST /user
   const user = req.body;
   const { error } = userValidation.validate(user);
   if (error) {
